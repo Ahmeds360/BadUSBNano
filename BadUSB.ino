@@ -1,3 +1,12 @@
+#include "Keyboard.h"
+
+void typeKey(uint8_t key)
+{
+  Keyboard.press(key);
+  delay(50);
+  Keyboard.release(key);
+}
+
 void setup()
 {
 
@@ -6,16 +15,7 @@ void setup()
 
   pinMode(8, OUTPUT);   // Set  pin 8 as output.
   digitalWrite(8, LOW); // Set the output pin low.
-}
 
-int RXLED = 17;
-
-void scriptYi() {}
-
-void scriptEr() {}
-
-void loop()
-{
   // Check the state of the pins. To see which pin is shorted to pin 8.
   int pinStateOne = digitalRead(7);
   int pinStateTwo = digitalRead(9);
@@ -23,24 +23,90 @@ void loop()
   // If pin 7 is shorted to pin 8, the scriptYi function runs.
   if (pinStateOne == LOW)
   {
-    digitalWrite(RXLED, LOW); // Turn the RX LED ON
-    TXLED0;                   // Turn the TX LED OFF
+    digitalWrite(17, LOW); // Turn the RX LED ON
+    TXLED0;                // Turn the TX LED OFF
 
     scriptYi();
   }
   else if (pinStateTwo == LOW)
   {
-    digitalWrite(RXLED, HIGH); // Turn the RX LED OFF
-    TXLED1;                    // Turn the TX LED ON
+    digitalWrite(17, HIGH); // Turn the RX LED OFF
+    TXLED1;                 // Turn the TX LED ON
 
     scriptEr();
   }
   else
-  {                           // If neither pin is shorted to pin 8 it will not run any scripts. #DEBUG
-    digitalWrite(RXLED, LOW); //  Turn the RX LED OFF
-    TXLED1;                   // Turn the TX LED ON
+  {                        // If neither pin is shorted to pin 8 it will not run any scripts. #DEBUG
+    digitalWrite(17, LOW); //  Turn the RX LED OFF
+    TXLED1;                // Turn the TX LED ON
   }
+}
 
-  delay(1000);
-  .
+void scriptYi()
+{
+  // Begining the Keyboard stream
+  Keyboard.begin();
+
+  // Wait 500ms
+  delay(500);
+
+  delay(2000);
+
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  Keyboard.releaseAll();
+
+  delay(200);
+
+  Keyboard.print("https://www.youtube.com/shorts/4C-djuJX8v0");
+
+  delay(200);
+
+  typeKey(KEY_RETURN);
+
+  delay(1800);
+
+  Keyboard.print("f");
+
+  delay(400);
+
+  // Ending stream
+  Keyboard.end();
+}
+
+void scriptEr()
+{
+
+  // Begining the Keyboard stream
+  Keyboard.begin();
+
+  // Wait 500ms
+  delay(500);
+
+  delay(2000);
+
+  Keyboard.press(KEY_LEFT_GUI);
+  Keyboard.press('r');
+  Keyboard.releaseAll();
+
+  delay(200);
+
+  Keyboard.print("https://www.youtube.com/watch?v=dQw4w9WgXcQ");
+
+  delay(200);
+
+  typeKey(KEY_RETURN);
+
+  delay(1800);
+
+  Keyboard.print("f");
+
+  delay(400);
+
+  // Ending stream
+  Keyboard.end();
+}
+
+void loop()
+{
 }

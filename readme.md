@@ -17,19 +17,21 @@ BadUSBNano is an Arduino project designed to emulate a BadUSB device using an Ar
 3. Connect the Arduino Nano Pro Micro to your computer.
 4. Open the Arduino IDE.
 5. Load the `BadUSBNano.ino` sketch.
-6. Customize the DuckyScript payloads in the sketch if needed.
-7. Upload the sketch to the Arduino Nano Pro Micro.
-8. Convert your DuckyScript payloads using [Nixu Corp's DuckyScript converter](https://nixu-corp.github.io/).
-9. Copy the converted payloads to the appropriate variables in the sketch.
-10. Enjoy using your BadUSBNano!
+6. Copy the contents of the converted DuckyScript payload from [Nixu Corp's DuckyScript converter](https://nixu-corp.github.io/).
+7. Paste the DuckyScript payload into either the `scriptYi()` or `scriptEr()` function in the `BadUSBNano.ino` sketch, depending on whether you want to run script 1 or script 2.
+8. To run script 1, short pins 8 and 9.
+9. To run script 2, short pins 7 and 8.
+10. For debugging purposes, don't short any pins, and no script will run.
+11. Upload the sketch to the Arduino Nano Pro Micro.
+12. Enjoy using your BadUSBNano!
 
 ## Usage
 
 1. Plug in the BadUSBNano device into a target computer.
-2. The device will automatically execute the configured DuckyScript payloads, if any.
-3. To run a single script, set `SINGLE_SCRIPT` to `true` in the sketch.
-4. To run two scripts sequentially, set `SINGLE_SCRIPT` to `false` in the sketch.
-5. To not run any script, leave both DuckyScript variables empty.
+2. The device will automatically execute the configured DuckyScript payloads, based on the pins shorted.
+3. To run a single script, short pins 8 and 9.
+4. To run two scripts sequentially, short pins 7 and 8.
+5. For debugging purposes, don't short any pins, and no script will run.
 
 ## Contributing
 
